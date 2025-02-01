@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
         // Create admin user
         $admin = User::create([
             'name' => 'Administrator',
-            'email' => 'admin@propertigampang.com',
+            'email' => 'admin@klikproperti.com',
             'password' => Hash::make('password'),
             'email_verified_at' => now(),
             'is_verified' => true,
@@ -28,15 +28,15 @@ class UserSeeder extends Seeder
             $testUsers = [
                 'agent' => [
                     'name' => 'Test Agent',
-                    'email' => 'agent@propertigampang.com',
+                    'email' => 'agent@klikproperti.com',
                 ],
                 'owner' => [
                     'name' => 'Test Owner',
-                    'email' => 'owner@propertigampang.com',
+                    'email' => 'owner@klikproperti.com',
                 ],
                 'renter' => [
                     'name' => 'Test Renter',
-                    'email' => 'renter@propertigampang.com',
+                    'email' => 'renter@klikproperti.com',
                 ],
             ];
 

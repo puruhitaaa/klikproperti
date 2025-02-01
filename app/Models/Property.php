@@ -39,6 +39,8 @@ class Property extends Model implements HasMedia
         'service_fee_percentage',
         'is_recommended',
         'documents_verified',
+        'rating',
+        'review_count',
     ];
 
     /**
@@ -56,6 +58,8 @@ class Property extends Model implements HasMedia
         'is_recommended' => 'boolean',
         'documents_verified' => 'boolean',
         'last_appraisal_date' => 'datetime',
+        'rating' => 'decimal:2',
+        'review_count' => 'integer',
     ];
 
     /**
@@ -91,6 +95,14 @@ class Property extends Model implements HasMedia
     }
 
     /**
+     * Get the reviews for the property.
+     */
+    public function propertyReviews(): HasMany
+    {
+        return $this->hasMany(PropertyReview::class);
+    }
+
+    /**
      * Scope a query to only include available properties.
      */
     public function scopeAvailable($query)
@@ -112,6 +124,16 @@ class Property extends Model implements HasMedia
     public function scopeVerified($query)
     {
         return $query->where('documents_verified', true);
+    }
+
+    /**
+     * Scope a query to only include popular properties.
+     */
+    public function scopePopular($query)
+    {
+        return $query->where('review_count', '>', 0)
+                    ->orderBy('rating', 'desc')
+                    ->orderBy('review_count', 'desc');
     }
 
     /**
