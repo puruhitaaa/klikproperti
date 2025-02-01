@@ -12,11 +12,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Seed roles first
-        $this->call(RoleSeeder::class);
-
-        // Seed users
-        $this->call(UserSeeder::class);
+        $this->call([
+            RoleSeeder::class,
+            UserSeeder::class,
+            PropertySeeder::class,
+            PropertyDocumentSeeder::class,
+        ]);
 
         // Initial platform settings
         $defaultSettings = [
