@@ -21,6 +21,7 @@ class Property extends Model implements HasMedia
      */
     protected $fillable = [
         'user_id',
+        'property_type_id',
         'title',
         'description',
         'price',
@@ -68,6 +69,14 @@ class Property extends Model implements HasMedia
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * Get the type of the property.
+     */
+    public function propertyType(): BelongsTo
+    {
+        return $this->belongsTo(PropertyType::class);
     }
 
     /**

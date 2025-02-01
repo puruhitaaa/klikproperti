@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('property_type_id')->constrained()->onDelete('restrict');
             $table->string('title');
             $table->text('description');
             $table->decimal('price', 15, 2);

@@ -34,6 +34,11 @@ class PropertyResource extends Resource
                             ->required()
                             ->searchable()
                             ->preload(),
+                        Forms\Components\Select::make('property_type_id')
+                            ->relationship('propertyType', 'name')
+                            ->required()
+                            ->searchable()
+                            ->preload(),
                         Forms\Components\RichEditor::make('description')
                             ->required()
                             ->columnSpanFull(),
@@ -112,9 +117,6 @@ class PropertyResource extends Resource
                             ->collection('property-images')
                             ->multiple()
                             ->reorderable()
-                            ->imageEditorAspectRatios([
-                                '16:9',
-                            ])
                             ->columnSpanFull(),
                     ]),
             ]);
@@ -131,6 +133,9 @@ class PropertyResource extends Resource
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('owner.name')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('propertyType.name')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('type')
@@ -159,6 +164,11 @@ class PropertyResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
+                Tables\Filters\SelectFilter::make('property_type_id')
+                    ->relationship('propertyType', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->label('Property Type'),
                 Tables\Filters\SelectFilter::make('type')
                     ->options([
                         'sale' => 'For Sale',

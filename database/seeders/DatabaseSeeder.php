@@ -12,6 +12,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // PropertyTypeSeeder must run before PropertySeeder
+        $this->call(PropertyTypeSeeder::class);
+
         $this->call([
             RoleSeeder::class,
             UserSeeder::class,

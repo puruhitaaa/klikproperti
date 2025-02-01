@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Property;
+use App\Models\PropertyType;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -18,6 +19,7 @@ class PropertySeeder extends Seeder
 
         $properties = [
             [
+                'property_type_id' => PropertyType::where('name', 'Apartment')->first()->id,
                 'title' => 'Apartemen Mewah Green Bay Pluit',
                 'description' => 'Apartemen mewah dengan pemandangan laut yang indah, dilengkapi dengan fasilitas lengkap seperti kolam renang, gym, dan taman bermain.',
                 'price' => 850000000,
@@ -37,6 +39,7 @@ class PropertySeeder extends Seeder
                 'is_recommended' => true,
             ],
             [
+                'property_type_id' => PropertyType::where('name', 'House')->first()->id,
                 'title' => 'Rumah Cluster BSD City',
                 'description' => 'Rumah cluster modern di kawasan elite BSD City. Lingkungan aman dan nyaman, dekat dengan sekolah dan pusat perbelanjaan.',
                 'price' => 2500000000,
@@ -56,6 +59,7 @@ class PropertySeeder extends Seeder
                 'is_recommended' => true,
             ],
             [
+                'property_type_id' => PropertyType::where('name', 'Boarding House')->first()->id,
                 'title' => 'Kost Exclusive Tebet',
                 'description' => 'Kost exclusive dengan fasilitas lengkap, lokasi strategis dekat stasiun Tebet dan pusat kuliner.',
                 'price' => 3500000,
@@ -75,6 +79,7 @@ class PropertySeeder extends Seeder
                 'is_recommended' => false,
             ],
             [
+                'property_type_id' => PropertyType::where('name', 'Shop House')->first()->id,
                 'title' => 'Ruko 3 Lantai Kelapa Gading',
                 'description' => 'Ruko strategis di kawasan bisnis Kelapa Gading, cocok untuk usaha atau kantor.',
                 'price' => 12000000,
