@@ -6,13 +6,6 @@ use App\Http\Controllers\PropertyReviewController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-// Route::get('/', function () {
-//     return Inertia::render('Landing', [
-//         'auth' => [
-//             'user' => Auth::user(),
-//         ],
-//     ]);
-// });
 Route::get('/', [LandingController::class, 'index'])->name('landing');
 
 Route::get('/dashboard', function () {

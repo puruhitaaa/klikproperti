@@ -9,8 +9,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 
 class PropertyResource extends Resource
 {
@@ -105,13 +105,16 @@ class PropertyResource extends Resource
                             ->required(),
                         Forms\Components\DateTimePicker::make('last_appraisal_date'),
                     ]),
-
                 Forms\Components\Section::make('Media')
                     ->schema([
-                        Forms\Components\FileUpload::make('images')
+                        SpatieMediaLibraryFileUpload::make('images')
                             ->image()
+                            ->collection('property-images')
                             ->multiple()
                             ->reorderable()
+                            ->imageEditorAspectRatios([
+                                '16:9',
+                            ])
                             ->columnSpanFull(),
                     ]),
             ]);

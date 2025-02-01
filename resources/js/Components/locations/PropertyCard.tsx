@@ -21,16 +21,15 @@ export function PropertyCard({
     };
 
     return (
-        <div className="w-full overflow-hidden border rounded-lg cursor-pointer bg-background group">
+        <div className="w-full overflow-hidden border rounded-lg cursor-pointer group bg-background">
             <div className="relative overflow-hidden aspect-video">
-                {JSON.stringify(image)}
-                {/* <img
-                    src={`/storage/${image}`}
+                <img
+                    src={image}
                     alt={title}
                     width={400}
                     height={300}
                     className="object-cover w-full transition-transform duration-300 group-hover:scale-110"
-                /> */}
+                />
             </div>
             <div className="p-4">
                 <div className="flex items-center justify-between">
@@ -52,7 +51,7 @@ export function PropertyCard({
                     <MapPin className="w-4 h-4" />
                     <span className="text-sm">{location_address}</span>
                 </div>
-                <div className="flex items-center gap-4 mt-4 overflow-x-auto text-sm text-muted-foreground scrollbar-hide shrink-0">
+                <div className="flex items-center gap-4 mt-4 overflow-x-auto text-sm scrollbar-hide shrink-0 text-muted-foreground">
                     <div className="flex items-center gap-2">
                         <Square className="w-4 h-4" />
                         <span className="text-nowrap">{area} m²</span>

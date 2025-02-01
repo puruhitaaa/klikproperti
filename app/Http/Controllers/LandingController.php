@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
-// use Illuminate\Support\Facades\Route;
 use App\Models\Property;
 use Inertia\Response;
 
@@ -37,7 +36,7 @@ class LandingController extends Controller
                         'id' => $property->owner->id,
                         'name' => $property->owner->name,
                     ],
-                    'image' => $property->getFirstMediaUrl('images'),
+                    'image' => $property->getFirstMediaUrl('property-images'),
                     'reviews' => $property->propertyReviews->take(3)->map(function ($review) {
                         return [
                             'id' => $review->id,
