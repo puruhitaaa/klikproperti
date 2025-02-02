@@ -34,6 +34,14 @@ export interface CompleteProperty {
     reviews: Review[];
 }
 
+export interface Location {
+    city: string;
+    property_count: number;
+    rating: number;
+    reviews: number;
+    image: string;
+}
+
 export type PageProps<
     T extends Record<string, unknown> = Record<string, unknown>,
 > = T & {

@@ -8,13 +8,13 @@ export function PropertyCard({
     image,
     price,
     title,
-    location_address,
     area,
     bathrooms,
     bedrooms,
     type,
     rating,
     review_count,
+    city,
 }: CompleteProperty) {
     const getStatus = (type: string) => {
         return type === 'sale' ? 'For Sale' : 'For Rent';
@@ -49,7 +49,7 @@ export function PropertyCard({
                 <h3 className="mt-2 text-lg font-medium">{title}</h3>
                 <div className="flex items-center gap-2 mt-3 text-gray-500">
                     <MapPin className="w-4 h-4" />
-                    <span className="text-sm">{location_address}</span>
+                    <span className="text-sm">{city}</span>
                 </div>
                 <div className="flex items-center gap-4 mt-4 overflow-x-auto text-sm scrollbar-hide shrink-0 text-muted-foreground">
                     <div className="flex items-center gap-2">

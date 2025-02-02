@@ -4,14 +4,18 @@ import Newsletter from '@/Components/landing/Newsletter';
 import PopularProperties from '@/Components/landing/PopularProperties';
 import Stats from '@/Components/landing/Stats';
 import ProductLayout from '@/Layouts/ProductLayout';
-import type { CompleteProperty } from '@/types';
+import type { CompleteProperty, Location } from '@/types';
 import { Head } from '@inertiajs/react';
 
 type LandingPageProps = {
     popularProperties: CompleteProperty[];
+    mostSearchedLocations: Location[];
 };
 
-export default function LandingPage({ popularProperties }: LandingPageProps) {
+export default function LandingPage({
+    popularProperties,
+    mostSearchedLocations,
+}: LandingPageProps) {
     return (
         <>
             <Head title="Landing" />
@@ -22,7 +26,9 @@ export default function LandingPage({ popularProperties }: LandingPageProps) {
                         <Hero />
 
                         {/* Most Searched Locations */}
-                        <MostSearched />
+                        <MostSearched
+                            mostSearchedLocations={mostSearchedLocations}
+                        />
 
                         {/* Stats Section */}
                         <Stats />

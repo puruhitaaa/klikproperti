@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Property;
 use Inertia\Response;
+use Illuminate\Support\Facades\DB;
 
 class LandingController extends Controller
 {
@@ -55,8 +56,47 @@ class LandingController extends Controller
         return Inertia::render('Landing', [
             'user' => Auth::user(),
             'popularProperties' => $popularProperties,
-            // 'canLogin' => Route::has('login'),
-            // 'canRegister' => Route::has('register'),
+            'mostSearchedLocations' => $this->getMostSearchedLocations(),
         ]);
+    }
+
+    private function getMostSearchedLocations()
+    {
+        return Property::select('city')
+            ->selectRaw('COUNT(*) as property_count')
+            ->selectRaw('COALESCE(AVG(rating), 0) as rating')
+            ->selectRaw('COALESCE(SUM(review_count), 0) as reviews')
+            ->whereNull('deleted_at')
+            ->groupBy('city')
+            ->orderBy('property_count', 'desc')
+            ->take(3)
+            ->get()
+            ->map(function ($location) {
+                return [
+                    'city' => $location->city,
+                    'property_count' => (int)$location->property_count,
+                    'rating' => round((float)$location->rating, 1),
+                    'reviews' => (int)$location->reviews,
+                    'image' => $this->getCityImage($location->city),
+                ];
+            });
+    }
+
+    private function getCityImage($city)
+    {
+        $cityImages = [
+            'Bandung' => '/images/cities/bandung.jpeg',
+            'Denpasar' => '/images/cities/denpasar.jpeg',
+            'Jakarta' => '/images/cities/jakarta.jpeg',
+            'Makassar' => '/images/cities/makassar.jpeg',
+            'Medan' => '/images/cities/medan.jpeg',
+            'Padang' => '/images/cities/padang.jpeg',
+            'Palembang' => '/images/cities/palembang.jpeg',
+            'Semarang' => '/images/cities/semarang.jpeg',
+            'Surabaya' => '/images/cities/surabaya.jpeg',
+            'Yogyakarta' => '/images/cities/yogyakarta.jpeg',
+        ];
+
+        return $cityImages[$city] ?? $cityImages['Jakarta'];
     }
 }
