@@ -6,7 +6,7 @@ import { Input } from '../ui/input';
 
 const Newsletter = () => {
     return (
-        <section className="px-4 py-16 bg-secondary lg:px-8">
+        <section className="bg-secondary px-4 py-16 lg:px-8">
             <div className="container mx-auto text-center">
                 <motion.h2
                     className="text-2xl font-bold md:text-3xl"
@@ -19,7 +19,7 @@ const Newsletter = () => {
                     News & Blog
                 </motion.h2>
                 <motion.div
-                    className="flex max-w-md gap-4 mx-auto mt-8"
+                    className="mx-auto mt-8 flex max-w-md gap-4"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
@@ -28,7 +28,9 @@ const Newsletter = () => {
                         className="border border-primary"
                         placeholder="your@email.com"
                     />
-                    <Button>Get Started</Button>
+                    <Button className="text-background dark:text-foreground">
+                        Get Started
+                    </Button>
                 </motion.div>
             </div>
         </section>

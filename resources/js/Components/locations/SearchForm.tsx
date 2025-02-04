@@ -16,7 +16,7 @@ export function SearchForm() {
         <div className="flex flex-col gap-4 md:flex-row md:items-end">
             <div className="grid flex-1 gap-2">
                 <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full" />
+                    <div className="h-2 w-2 rounded-full bg-blue-600" />
                     <span className="text-sm">Type</span>
                 </div>
                 <Select defaultValue="house">
@@ -31,7 +31,7 @@ export function SearchForm() {
             </div>
             <div className="grid flex-1 gap-2">
                 <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full" />
+                    <div className="h-2 w-2 rounded-full bg-blue-600" />
                     <span className="text-sm">Location</span>
                 </div>
                 <Input
@@ -41,7 +41,7 @@ export function SearchForm() {
             </div>
             <div className="grid flex-1 gap-2">
                 <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full" />
+                    <div className="h-2 w-2 rounded-full bg-blue-600" />
                     <span className="text-sm">Price Range</span>
                 </div>
                 <Select defaultValue="range1">
@@ -58,8 +58,8 @@ export function SearchForm() {
                     </SelectContent>
                 </Select>
             </div>
-            <Button className="bg-blue-600 hover:bg-blue-700">
-                <Search className="w-4 h-4 mr-2" />
+            <Button className="bg-blue-600 text-background hover:bg-blue-700 dark:text-foreground">
+                <Search className="mr-2 h-4 w-4" />
                 Search
             </Button>
         </div>

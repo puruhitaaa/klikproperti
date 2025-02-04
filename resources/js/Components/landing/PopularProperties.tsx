@@ -57,7 +57,7 @@ const PopularProperties = ({
                             onClick={handlePrev}
                             disabled={currentPage === 0}
                         >
-                            <ChevronLeft className="w-4 h-4" />
+                            <ChevronLeft className="h-4 w-4" />
                         </Button>
                         <Button
                             variant="outline"
@@ -65,11 +65,11 @@ const PopularProperties = ({
                             onClick={handleNext}
                             disabled={currentPage === totalPages - 1}
                         >
-                            <ChevronRight className="w-4 h-4" />
+                            <ChevronRight className="h-4 w-4" />
                         </Button>
                     </div>
                 </motion.div>
-                <div className="grid gap-8 mt-8 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                     {displayedProperties.length ? (
                         [
                             ...displayedProperties,
@@ -78,6 +78,7 @@ const PopularProperties = ({
                             prop === null ? (
                                 <motion.div
                                     key="view-all"
+                                    className="w-full"
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{
@@ -87,18 +88,19 @@ const PopularProperties = ({
                                 >
                                     <Link
                                         href="/properties"
-                                        className="relative flex items-center justify-center h-full p-4 transition-all duration-300 ease-in-out border-2 border-dashed rounded-md border-primary/30 hover:border-primary group"
+                                        className="group relative flex h-full items-center justify-center rounded-md border-2 border-dashed border-primary/30 p-4 transition-all duration-300 ease-in-out hover:border-primary"
                                     >
                                         <div className="text-center">
-                                            <p className="text-lg font-semibold transition-colors text-primary group-hover:text-primary/80">
+                                            <p className="text-lg font-semibold text-primary transition-colors group-hover:text-primary/80">
                                                 View All Properties
                                             </p>
-                                            <ArrowRight className="mx-auto mt-2 transition-transform text-primary group-hover:translate-x-1" />
+                                            <ArrowRight className="mx-auto mt-2 text-primary transition-transform group-hover:translate-x-1" />
                                         </div>
                                     </Link>
                                 </motion.div>
                             ) : (
                                 <motion.div
+                                    className="w-full"
                                     key={prop.id}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}

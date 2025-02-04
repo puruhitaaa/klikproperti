@@ -37,13 +37,13 @@ const links = [
 function Header() {
     return (
         <header className="sticky top-0 z-50 bg-background/30 backdrop-blur-sm">
-            <div className="container flex items-center p-4 mx-auto lg:px-6">
+            <div className="container mx-auto flex items-center p-4 lg:px-6">
                 <div className="flex items-center gap-4">
                     <Link className="block" href="/">
-                        <Logo className="w-auto h-6" />
+                        <Logo className="h-6 w-auto" />
                         <span className="sr-only">KlikProperti</span>
                     </Link>
-                    <nav className="hidden gap-4 ml-auto sm:gap-6 md:flex">
+                    <nav className="ml-auto hidden gap-4 sm:gap-6 md:flex">
                         {links.map((link) => (
                             <Link
                                 key={link.href}
@@ -56,18 +56,24 @@ function Header() {
                     </nav>
                 </div>
                 <div className="ml-auto">
-                    <div className="items-center hidden gap-4 sm:gap-6 md:flex">
+                    <div className="hidden items-center gap-4 sm:gap-6 md:flex">
                         <Button asChild variant="ghost">
                             <Link href="/login">Sign In</Link>
                         </Button>
-                        <Button asChild>
+                        <Button
+                            className="text-background dark:text-foreground"
+                            asChild
+                        >
                             <Link href="/register">Sign Up</Link>
                         </Button>
                         <ModeToggle />
                     </div>
                     <Sheet>
                         <SheetTrigger className="md:hidden" asChild>
-                            <Button className="md:hidden" size="icon">
+                            <Button
+                                className="text-background dark:text-foreground md:hidden"
+                                size="icon"
+                            >
                                 <Menu />
                             </Button>
                         </SheetTrigger>
@@ -80,7 +86,7 @@ function Header() {
                                     Mobile Menu
                                 </SheetDescription>
                             </SheetHeader>
-                            <div className="flex flex-col p-4 space-y-4">
+                            <div className="flex flex-col space-y-4 p-4">
                                 {links.map((link) => (
                                     <Link
                                         key={link.href}
@@ -98,7 +104,10 @@ function Header() {
                                 <Button asChild variant="outline">
                                     <Link href="/login">Sign In</Link>
                                 </Button>
-                                <Button asChild>
+                                <Button
+                                    className="text-background dark:text-foreground"
+                                    asChild
+                                >
                                     <Link href="/register">Sign Up</Link>
                                 </Button>
                                 <ModeToggle />

@@ -12,7 +12,7 @@ class LandingController extends Controller
 {
     public function index(): Response
     {
-        $popularProperties = Property::with(['owner', 'propertyReviews.user'])
+        $popularProperties = Property::with(['owner', 'propertyReviews.user', 'propertyType'])
             ->withCount('propertyReviews')
             ->withAvg('propertyReviews', 'rating')
             ->popular()
@@ -36,6 +36,10 @@ class LandingController extends Controller
                     'owner' => [
                         'id' => $property->owner->id,
                         'name' => $property->owner->name,
+                    ],
+                    'property_type' => [
+                        'id' => $property->propertyType->id,
+                        'name' => $property->propertyType->name,
                     ],
                     'image' => $property->getFirstMediaUrl('property-images'),
                     'reviews' => $property->propertyReviews->take(3)->map(function ($review) {

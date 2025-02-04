@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PropertyReviewController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [LandingController::class, 'index'])->name('landing');
+Route::get('/listings', [ListingController::class, 'index'])->name('listings.index');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

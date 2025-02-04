@@ -15,21 +15,25 @@ export function PropertyCard({
     rating,
     review_count,
     city,
+    property_type,
 }: CompleteProperty) {
     const getStatus = (type: string) => {
         return type === 'sale' ? 'For Sale' : 'For Rent';
     };
 
     return (
-        <div className="w-full overflow-hidden border rounded-lg cursor-pointer group bg-background">
-            <div className="relative overflow-hidden aspect-video">
+        <div className="group w-full cursor-pointer overflow-hidden rounded-lg border bg-background">
+            <div className="relative aspect-video overflow-hidden">
                 <img
                     src={image}
                     alt={title}
                     width={400}
                     height={300}
-                    className="object-cover w-full transition-transform duration-300 group-hover:scale-110"
+                    className="w-full object-cover transition-transform duration-300 group-hover:scale-110"
                 />
+                <Badge className="absolute right-0 top-0 m-4 border-0 !bg-primary text-background dark:text-foreground">
+                    {property_type.name}
+                </Badge>
             </div>
             <div className="p-4">
                 <div className="flex items-center justify-between">
@@ -37,7 +41,7 @@ export function PropertyCard({
                         Rp {price.toLocaleString('id-ID')}
                     </div>
                     <div className="flex items-center gap-1">
-                        <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                         <span className="text-sm font-medium">
                             {rating.toFixed(1)}
                         </span>
@@ -47,31 +51,29 @@ export function PropertyCard({
                     </div>
                 </div>
                 <h3 className="mt-2 text-lg font-medium">{title}</h3>
-                <div className="flex items-center gap-2 mt-3 text-gray-500">
-                    <MapPin className="w-4 h-4" />
+                <div className="mt-3 flex items-center gap-2 text-gray-500">
+                    <MapPin className="h-4 w-4" />
                     <span className="text-sm">{city}</span>
                 </div>
-                <div className="flex items-center gap-4 mt-4 overflow-x-auto text-sm scrollbar-hide shrink-0 text-muted-foreground">
+                <div className="scrollbar-hide mt-4 flex shrink-0 items-center gap-4 overflow-x-auto text-sm text-muted-foreground">
                     <div className="flex items-center gap-2">
-                        <Square className="w-4 h-4" />
+                        <Square className="h-4 w-4" />
                         <span className="text-nowrap">{area} m²</span>
                     </div>
                     <div className="flex items-center gap-2">
-                        <Bath className="w-4 h-4" />
+                        <Bath className="h-4 w-4" />
                         <span className="text-nowrap">
                             {bathrooms} Bathrooms
                         </span>
                     </div>
                     <div className="flex items-center gap-2">
-                        <Bed className="w-4 h-4" />
+                        <Bed className="h-4 w-4" />
                         <span className="text-nowrap">{bedrooms} Bedrooms</span>
                     </div>
                 </div>
             </div>
-            <div className="flex items-center gap-2 p-4 bg-secondary">
-                <Badge variant="outline" className="border-primary">
-                    {getStatus(type)}
-                </Badge>
+            <div className="flex items-center gap-2 bg-secondary p-4">
+                <Badge>{getStatus(type)}</Badge>
             </div>
         </div>
     );

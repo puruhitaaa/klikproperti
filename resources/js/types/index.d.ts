@@ -21,6 +21,10 @@ export interface CompleteProperty {
     description: string;
     price: number;
     type: 'sale' | 'rent';
+    property_type: {
+        id: string;
+        name: string;
+    };
     location_address: string;
     city: string;
     bedrooms: number;
@@ -31,6 +35,7 @@ export interface CompleteProperty {
     review_count: number;
     owner: User;
     image: string;
+    status: string;
     reviews: Review[];
 }
 
