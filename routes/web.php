@@ -9,6 +9,12 @@ use Inertia\Inertia;
 
 Route::get('/', [LandingController::class, 'index'])->name('landing');
 Route::get('/listings', [ListingController::class, 'index'])->name('listings.index');
+Route::get('/services', function () {
+    return Inertia::render('Services');
+})->name('services');
+Route::get('/about-us', function () {
+    return Inertia::render('AboutUs');
+})->name('about-us');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

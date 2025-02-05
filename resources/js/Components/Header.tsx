@@ -39,7 +39,7 @@ function Header() {
         <header className="sticky top-0 z-50 bg-background/30 backdrop-blur-sm">
             <div className="container mx-auto flex items-center p-4 lg:px-6">
                 <div className="flex items-center gap-4">
-                    <Link className="block" href="/">
+                    <Link prefetch="hover" className="block" href="/">
                         <Logo className="h-6 w-auto" />
                         <span className="sr-only">KlikProperti</span>
                     </Link>
@@ -49,6 +49,7 @@ function Header() {
                                 key={link.href}
                                 className="text-sm font-medium underline-offset-4 hover:underline"
                                 href={link.href}
+                                prefetch="hover"
                             >
                                 {link.title}
                             </Link>
@@ -58,13 +59,17 @@ function Header() {
                 <div className="ml-auto">
                     <div className="hidden items-center gap-4 sm:gap-6 md:flex">
                         <Button asChild variant="ghost">
-                            <Link href="/login">Sign In</Link>
+                            <Link prefetch="hover" href="/login">
+                                Sign In
+                            </Link>
                         </Button>
                         <Button
                             className="text-background dark:text-foreground"
                             asChild
                         >
-                            <Link href="/register">Sign Up</Link>
+                            <Link prefetch="hover" href="/register">
+                                Sign Up
+                            </Link>
                         </Button>
                         <ModeToggle />
                     </div>
@@ -96,19 +101,24 @@ function Header() {
                                             variant: 'secondary',
                                         })}
                                         href={link.href}
+                                        prefetch="hover"
                                     >
                                         {link.title}
                                     </Link>
                                 ))}
                                 <Separator />
                                 <Button asChild variant="outline">
-                                    <Link href="/login">Sign In</Link>
+                                    <Link prefetch="hover" href="/login">
+                                        Sign In
+                                    </Link>
                                 </Button>
                                 <Button
                                     className="text-background dark:text-foreground"
                                     asChild
                                 >
-                                    <Link href="/register">Sign Up</Link>
+                                    <Link prefetch="hover" href="/register">
+                                        Sign Up
+                                    </Link>
                                 </Button>
                                 <ModeToggle />
                             </div>

@@ -16,7 +16,7 @@ import { Head, router, usePage } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { debounce } from 'lodash';
 import { Filter, X } from 'lucide-react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 interface ListingsPageProps {
     properties: {
@@ -33,7 +33,7 @@ interface ListingsPageProps {
         search?: string;
         min_price?: string;
         max_price?: string;
-        property_type?: string;
+        property_type_id?: string;
         city?: string;
         bedrooms?: string;
         bathrooms?: string;
@@ -58,32 +58,39 @@ export default function ListingsPage({
     const observerTarget = useRef(null);
     const { url } = usePage();
 
-    const debouncedSearch = useCallback(
-        debounce((query) => {
-            updateFilters({ search: query });
-        }, 300),
-        [],
+    const updateFilters = useCallback(
+        (newFilters: Partial<ListingsPageProps['filters']>) => {
+            const updatedFilters = { ...filters, ...newFilters };
+            setFilters(updatedFilters);
+
+            router.get(
+                url,
+                {
+                    ...updatedFilters,
+                    page: 1,
+                },
+                {
+                    preserveState: true,
+                    preserveScroll: true,
+                    replace: true,
+                    onSuccess: (page) => {
+                        const newProperties = page.props
+                            .properties as typeof initialProperties;
+                        setProperties(newProperties);
+                    },
+                },
+            );
+        },
+        [filters, url],
     );
 
-    const updateFilters = (
-        newFilters: Partial<ListingsPageProps['filters']>,
-    ) => {
-        const updatedFilters = { ...filters, ...newFilters };
-        setFilters(updatedFilters);
-
-        router.get(
-            url,
-            {
-                ...updatedFilters,
-                page: 1,
-            },
-            {
-                preserveState: true,
-                preserveScroll: true,
-                replace: true,
-            },
-        );
-    };
+    const debouncedSearch = useMemo(
+        () =>
+            debounce((query: string) => {
+                updateFilters({ search: query });
+            }, 300),
+        [updateFilters],
+    );
 
     const loadMore = useCallback(() => {
         if (loading || properties.current_page >= properties.last_page) return;
@@ -170,9 +177,11 @@ export default function ListingsPage({
                             <div>
                                 <Label>Property Type</Label>
                                 <Select
-                                    value={filters.property_type}
+                                    value={filters.property_type_id}
                                     onValueChange={(value) =>
-                                        updateFilters({ property_type: value })
+                                        updateFilters({
+                                            property_type_id: value,
+                                        })
                                     }
                                 >
                                     <SelectTrigger className="mt-1">

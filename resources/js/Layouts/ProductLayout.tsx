@@ -10,7 +10,7 @@ interface ProductLayoutProps {
 export default function ProductLayout({ children }: ProductLayoutProps) {
     return (
         <ThemeProvider>
-            <div className="flex flex-col min-h-screen">
+            <div className="flex min-h-screen flex-col">
                 <Header />
                 <main>{children}</main>
                 <Footer />
