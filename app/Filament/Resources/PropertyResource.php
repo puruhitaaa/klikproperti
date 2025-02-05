@@ -116,8 +116,10 @@ class PropertyResource extends Resource
                             ->image()
                             ->collection('property-images')
                             ->multiple()
-                            ->reorderable()
-                            ->columnSpanFull(),
+                            ->reorderable(),
+                        SpatieMediaLibraryFileUpload::make('videos')
+                            ->collection('property-videos')
+                            ->acceptedFileTypes(['video/mp4', 'video/quicktime', 'video/x-msvideo', 'video/x-matroska']),
                     ]),
             ]);
     }

@@ -151,11 +151,20 @@ class Property extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('images')
-            ->useDisk('public')
+            ->useDisk('s3')
             ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp'])
             ->useFallbackUrl('/images/property-placeholder.jpg');
 
         $this->addMediaCollection('documents')
-            ->useDisk('public');
+            ->useDisk('s3');
+
+        $this->addMediaCollection('videos')
+            ->useDisk('s3')
+            ->acceptsMimeTypes([
+                'video/mp4',
+                'video/quicktime',
+                'video/x-msvideo'
+            ])
+            ->singleFile();
     }
 }
