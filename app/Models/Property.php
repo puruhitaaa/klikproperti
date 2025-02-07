@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\File;
 
 class Property extends Model implements HasMedia
 {
@@ -150,21 +151,21 @@ class Property extends Model implements HasMedia
      */
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('images')
+        $this->addMediaCollection('property-images')
             ->useDisk('s3')
-            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp'])
+            ->acceptsFile(function (File $file) {
+                return $file->mimeType === 'image/jpeg' || $file->mimeType === 'image/jpg' || $file->mimeType === 'image/png' || $file->mimeType === 'image/webp';
+            })
             ->useFallbackUrl('/images/property-placeholder.jpg');
 
         $this->addMediaCollection('documents')
             ->useDisk('s3');
 
-        $this->addMediaCollection('videos')
+        $this->addMediaCollection('property-videos')
             ->useDisk('s3')
-            ->acceptsMimeTypes([
-                'video/mp4',
-                'video/quicktime',
-                'video/x-msvideo'
-            ])
+            ->acceptsFile(function (File $file) {
+                return $file->mimeType === 'video/mp4' || $file->mimeType === 'video/quicktime' || $file->mimeType === 'video/x-msvideo' || $file->mimeType === 'video/x-matroska';
+            })
             ->singleFile();
     }
 }

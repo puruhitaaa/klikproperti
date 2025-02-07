@@ -44,7 +44,7 @@ class VoucherResource extends Resource
                         Forms\Components\TextInput::make('value')
                             ->required()
                             ->numeric()
-                            ->prefix(fn (string $get) => $get('type') === 'percentage' ? '%' : 'Rp'),
+                            ->prefix(fn ($get) => $get('type') === 'percentage' ? '%' : 'Rp'),
                     ])->columns(2),
 
                 Forms\Components\Section::make('Usage Limits')
